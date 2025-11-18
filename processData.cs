@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-string path = "D:\\C#_Code\\C-study\\C-study-master\\HF0253A_V11_F8DUT_TEST_P15395__05_10272025_091847.stdf";
+string path = @"D:\HF0253A_V11_F8DUT_TEST_P15395__05_10272025_091847.stdf";
 
 var reader = new StdfFile(path);
 // Cache records to avoid re-enumeration
@@ -42,7 +42,7 @@ Dictionary<string, Dictionary<(int, int), double>> ProcessData(List<Ptr> ptrs, L
         // 动态检测当前的循环倍数（1-8之间）
         int currentCycleMultiple = DetectCycleMultiple(ptrs, dataIndex);
         //Console.WriteLine($"Processing from index {dataIndex} with multiple: {currentCycleMultiple}");
-                                           
+
         // 处理当前循环倍数的数据块，返回已消费的 Ptr 数量
         int consumed = ProcessCycleBlock(ptrs, prrs, result,
                                         ref dataIndex, ref coordinateIndex, currentCycleMultiple);
@@ -153,15 +153,16 @@ int ProcessCycleBlock(List<Ptr> ptrs, List<Prr> prrs,
     // 处理整个块（尽可能多的完整周期）
     while (dataIndex + blockSize <= ptrs.Count)
     {
-        // 为整个块按顺序分配坐标，使每个 Ptr 对应一个 Prr
-        int dataEntriesThisBlock = 0;
+        //// 为整个块按顺序分配坐标，使每个 Ptr 对应一个 Prr
+        //int dataEntriesThisBlock = 0;
 
         // 处理一个完整周期
         bool blockMatch = true;
         for (int baseIdx = 0; baseIdx < baseCount && blockMatch; baseIdx++)
         {
             string baseName = baseNames[baseIdx];
-
+            // 为整个块按顺序分配坐标，使每个 Ptr 对应一个 Prr
+            int dataEntriesThisBlock = 0;
             for (int repeat = 0; repeat < cycleMultiple; repeat++)
             {
                 int currentDataIndex = dataIndex + (baseIdx * cycleMultiple) + repeat;
@@ -213,7 +214,7 @@ int ProcessCycleBlock(List<Ptr> ptrs, List<Prr> prrs,
         totalConsumed += blockSize;
 
         // 坐标索引按处理的 Ptr 数量前进
-        coordinateIndex = (coordinateIndex + dataEntriesThisBlock) % prrs.Count;
+        coordinateIndex = (coordinateIndex + cycleMultiple) % prrs.Count;
     }
 
     return totalConsumed;
