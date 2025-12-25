@@ -4,3 +4,17 @@ git init    //创建本地空仓库
 git add 文件名    //添加文件到暂存区
 git commit -m " "    //将暂存区的文件提交到本地仓库
 git commit --amend    //重写上次的提交信息
+git log    //查看日志
+git log --oneline    //查看日志（简洁）
+git reset --hard 版本号    //回滚操作
+git reset --hard HEAD^    //回滚上一个版本
+git reset --hard HEAD~3    //回滚前3个版本
+touch 文件名    //新增文件名
+git status    //查看状态
+rm 文件名    //删除文件
+git log 文件名    //查看文件可回滚版本
+git reset 版本id 文件名    //文件历史版本回滚
+git reflog    //查看当前版本库的提交历史，凡是对仓库版本进行迭代的都会出现在这个里面，包括回滚版本都会出现在这个历史中
+git branch    //查看本地分支
+git branch -a    //查看所有分支(本地分支和远程跟踪分支)
+git branch -r    //查看远程跟踪分支
