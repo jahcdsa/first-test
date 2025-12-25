@@ -1,0 +1,6 @@
+git config --global user.name "你的用户名"    //全局配置
+git config --global user.eamil ""
+git init    //创建本地空仓库
+git add 文件名    //添加文件到暂存区
+git commit -m " "    //将暂存区的文件提交到本地仓库
+git commit --amend    //重写上次的提交信息
