@@ -26,4 +26,17 @@ git push -u origin master    //推送到远程仓库
 git checkout -b new-feature    //创建并切换到新本地分支
 git switch -c new-feature    //创建并切换到新本地分支（Git 2.23+ 推荐语法）
 git switch/checkout 分支名    //切换分支名
-     
+# 1. 暂存当前分支的所有修改（包括已暂存和未暂存的）
+git stash push -m "支付功能开发中"
+
+# 2. 切换到主分支
+git checkout main
+# 或 git switch main (Git 2.23+ 推荐)
+
+# 3. 从主分支创建并切换到新分支
+git checkout -b feature-new-logic
+# 或 git switch -c feature-new-logic
+
+# 4. 在新分支开发完成后，切回原分支恢复工作
+git checkout feature-payment
+git stash pop    # 恢复最近一次暂存并删除记录

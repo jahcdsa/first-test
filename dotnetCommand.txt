@@ -1,0 +1,8 @@
+dotnet --version    //查看版本
+dotnet new list    //查看所有项目模版
+dotnet new console -n Name    //创建控制台项目
+dotnet new webapi -n Name    //创建WebApi项目
+dotnet new web -n Name    //创建MinimalApi项目
+dotnet new mvc -n Name    //创建MVC项目
+dotnet build    //默认Debug
+dotnet -c release    //生产环境
